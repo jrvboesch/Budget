@@ -5,8 +5,11 @@ import {
 	routerReducer
 } from 'react-router-redux';
 
+import BudgetReducer from '../features/Budget/reducer';
+
 const rootReducer = combineReducers({
-	routing: routerReducer
+	routing: routerReducer,
+	budget: BudgetReducer
 });
 
 export default rootReducer;

@@ -6,8 +6,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 import { PersistGate } from 'redux-persist/integration/react';
+import axios from 'axios';
 
-const store = configureStore();
+axios.defaults.baseURL = "http://localhost:4000/api"; 
+
+const store = configureStore({});
 
 const history = syncHistoryWithStore(browserHistory, store.store);
 

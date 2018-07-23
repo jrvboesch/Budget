@@ -3,7 +3,8 @@ import {
 	FETCH_BUDGETS,
 	ADD_BUDGET,
 	EDIT_BUDGET,
-	DELETE_BUDGET
+	DELETE_BUDGET,
+	RESET_APP
 } from './actionTypes';
 
 const initState = {
@@ -20,6 +21,8 @@ const reducer = (state = initState, action) => {
 				...state,
 				budgets: action.budgets
 			};
+		case RESET_APP:
+			return initState
 		default:
 			return state;
 	}

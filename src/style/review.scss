@@ -1,0 +1,27 @@
+.review{
+	.info {
+		.desc {
+			margin-bottom: 10px;
+		}
+		.init {
+			margin-bottom: 10px;
+			strong {
+				padding-right: 5px;
+			}
+		}
+		.current {
+			margin-bottom: 10px;
+			strong {
+				padding-right: 5px;
+			}
+		}
+	}
+	.list {
+		.add {
+			margin-left: 5px;
+		}
+		.cardActions {
+			font-size: 20px;
+		}
+	}
+}

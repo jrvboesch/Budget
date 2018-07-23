@@ -79,7 +79,6 @@ export const EditBudgets = (budget) => (dispatch, getState) => {
 const deleteBudgets = (budgetId ,budgets) => {
 	let newBudgets = budgets.filter((budg) => budg.id != budgetId);
 	
-	console.log(newBudgets)
 	return {
 		type: DELETE_BUDGET,
 		budgets: newBudgets

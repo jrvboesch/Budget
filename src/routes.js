@@ -12,7 +12,7 @@ export default (
 		<Route path="/" component={Main}>
 			<IndexRoute component={Home}/>
 			<Route path="budgets" component={Budget}/>
-			<Route path="review" component={Review}/>
+			<Route path="review/(:id)" component={Review}/>
 		</Route>
 		<Route path="*" component={PageNotFound}/>
 	</Route>

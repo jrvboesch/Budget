@@ -62,17 +62,17 @@ class Budget extends React.Component {
 			return (
 				<Col span={6} key={budget.id} className="budgetCards">
 					<Card 
-					title={budget.name} 
+					title={budget.name}
 					extra={
 						<div>
-							<a href="#" className="cardActions">
+							<a className="cardActions">
 								<Icon type="edit" onClick={() => this.showModal(budget)}/>
 							</a>
-							<a href="#" className="cardActions">
+							<a className="cardActions">
 								<Icon type="delete" onClick={() => deleteBudget(budget.id)}/>
 							</a>
-							<a href="#" className="cardActions">
-								<Icon type="eye-o" onClick={() => goToPage('/reviewv')}/>
+							<a className="cardActions">
+								<Icon type="eye-o" onClick={() => goToPage(`/review/${budget.id}`)}/>
 							</a>
 						</div>
 					} 

@@ -1,6 +1,8 @@
 @import 'budget';
+@import 'review';
 
 .mainLayout {
+	height:100vh;
 	.head {
 		width: 100%;
 	}
@@ -16,9 +18,9 @@
 	}
 	.content {
 		margin: 24px 16px 0;
-		height: auto;
 		background: #fff;
 		min-height: 300px;
 		padding: 20px;
+		overflow-y: scroll;
 	}
 }

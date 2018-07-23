@@ -7,9 +7,9 @@ import {
 	Button,
 	Modal
 } from 'antd';
-import BudgetForm from './BudgetForm';
+import HistoryForm from './HistoryForm';
 
-export class BudgetModal extends React.Component {
+export class HistoryModal extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -22,7 +22,7 @@ export class BudgetModal extends React.Component {
 			form,
 			action,
 			handleCancel,
-			budget
+			history
 		} = this.props;
 
 		this.setState({
@@ -30,7 +30,7 @@ export class BudgetModal extends React.Component {
 			});
 		form.validateFields((err, values) => {
 			if (!err) {
-				action({...values, id: (budget)?budget.id:0})
+				action({...values, id: (history)?history.id:0})
 					.then(handleCancel)
 					.then(() => {
 						this.setState({
@@ -47,8 +47,8 @@ export class BudgetModal extends React.Component {
 		});
 	}
 	render() {
-		const {form,  showModal, handleCancel, budget} = this.props;
-		let ModalTitle = (budget) ? "Edit Budget" : "Add Budget";
+		const {form,  showModal, handleCancel, history} = this.props;
+		let ModalTitle = (history) ? "Edit History" : "Add History";
 
 		return (
 			<Modal
@@ -67,13 +67,18 @@ export class BudgetModal extends React.Component {
 					</Button>,
 				]}
 			>
-				<BudgetForm
+				<HistoryForm
 					form={form}
-					budget={budget}
+					history={history}
 				/>
 			</Modal>
 		);
 	}
 };
 
-export default (Form.create()(BudgetModal));
+const mapDispatchToProps = (dispatch) => {
+	return {
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Form.create()(HistoryModal));

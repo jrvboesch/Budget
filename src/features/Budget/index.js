@@ -1,30 +1,110 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import {FeatchBudgets} from './Actions';
+import {
+	connect
+} from 'react-redux';
+import {
+	Link
+} from 'react-router';
+import {
+	FeatchBudgets,
+	EditBudgets,
+	AddBudgets,
+	DeleteBudgets
+} from './Actions';
+import {
+	Card,
+	Col,
+	Row,
+	Button,
+	Icon
+} from 'antd';
+import {
+	push
+} from 'react-router-redux';
+import BudgetModal from './BudgetModal';
 
 class Budget extends React.Component {
+
 	constructor(props) {
-	  super(props);
-	
+		super(props);
+
+		this.state = {
+			loading: true,
+			showModal: false,
+			budget: undefined
+		};
+
+		props.featchBudget().then(() => {
+			this.setState({
+				loading: false
+			});
+		});
 	}
 
+	showModal = (budget = undefined) => {
+		this.setState({
+			showModal: true,
+			budget: budget
+		});
+	};
+
+	hideModal = () => {
+		this.setState({
+			showModal: false,
+			budget: undefined
+		});
+	};
+
 	render() {
-		const {budgets, featchBudget} = this.props;
+		const {budgets, featchBudget, editBudget, addBudget, deleteBudget, goToPage} = this.props;
 
 		let budgetList = budgets.map((budget)=> {
-			return (<li key={budget.id}>
-				{budget.name}
-			</li>);
+			return (
+				<Col span={6} key={budget.id} className="budgetCards">
+					<Card 
+					title={budget.name} 
+					extra={
+						<div>
+							<a href="#" className="cardActions">
+								<Icon type="edit" onClick={() => this.showModal(budget)}/>
+							</a>
+							<a href="#" className="cardActions">
+								<Icon type="delete" onClick={() => deleteBudget(budget.id)}/>
+							</a>
+							<a href="#" className="cardActions">
+								<Icon type="eye-o" onClick={() => goToPage('/reviewv')}/>
+							</a>
+						</div>
+					} 
+					loading={this.state.loading}
+						>
+						<Col span={24}>
+							{budget.description}
+						</Col>
+						<Col span={24}>
+							{budget.budget} $
+						</Col>
+					</Card>
+				</Col>
+			);
 		});
 		
 		return (
-			<div>
-				Budget Page
-				<div onClick={featchBudget}>get budgets ></div>
-				<ul>
+			<div className="budget">
+				<Row gutter={16} className="actions">
+					<Col span={6}>
+						<Button type="primary" icon="plus" onClick={() => this.showModal()}>Budget</Button>
+					</Col>
+				</Row>
+				<Row gutter={16}>
 					{budgetList}
-				</ul>
+				</Row>
+				<BudgetModal
+					showModal={this.state.showModal} 
+					handleCancel={this.hideModal}
+					budget={this.state.budget}
+					action={(this.state.budget)?editBudget:addBudget}
+				/>
 			</div>
 		);
 	}
@@ -37,9 +117,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        featchBudget: () => dispatch(FeatchBudgets())
-    };
+	return {
+		featchBudget: () => dispatch(FeatchBudgets()),
+		editBudget: (budget) => dispatch(EditBudgets(budget)),
+		addBudget: (budget) => dispatch(AddBudgets(budget)),
+		deleteBudget: (budget) => dispatch(DeleteBudgets(budget)),
+		goToPage: (page) => dispatch(push(page))
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Budget);

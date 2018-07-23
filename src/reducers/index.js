@@ -7,11 +7,13 @@ import {
 
 import BudgetReducer from '../features/Budget/reducer';
 import budgetHistoryReducer from '../features/BudgetReview/reducer';
+import budgetReportReducer from '../features/Home/reducer';
 
 const rootReducer = combineReducers({
 	routing: routerReducer,
 	budget: BudgetReducer,
-	review: budgetHistoryReducer
+	review: budgetHistoryReducer,
+	budgetReport: budgetReportReducer
 });
 
 export default rootReducer;
